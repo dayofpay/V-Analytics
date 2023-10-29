@@ -30,7 +30,12 @@ router.post('/sites/:id', async (req,res) => {
 
                 // Increment the visitors amount
 
-                siteUrl.visitors++;
+                if(!siteUrl.visitors_list.includes(req.ip)){
+                    siteUrl.visitors_list.push(req.ip);
+                    siteUrl.visitors++;
+                }
+
+                siteUrl.visits++;
                 siteUrl.save();
             }
             else{

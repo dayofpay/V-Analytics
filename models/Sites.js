@@ -27,6 +27,14 @@ const siteSchema = new mongoose.Schema({
   visitors : {
     type: Number,
     default : 1,
+  },
+  visits : {
+    type: Number,
+    default : 1,
+  },
+  visitors_list : {
+    type : Array,
+    default : [],
   }
 });
 
