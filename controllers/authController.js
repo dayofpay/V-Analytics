@@ -6,9 +6,6 @@ const middlewares = require('../middlewares/auth');
 
 const userServices = require('../services/userServices');
 
-const notificationServices = require('../services/notificationServices');
-const jwt = require("../lib/jwt");
-
 router.get('/login',middlewares.preventAuthenticatedUser, async (req, res) => {
 
     res.render('auth/login');
@@ -27,7 +24,6 @@ router.post('/login',middlewares.preventAuthenticatedUser,async (req,res) => {
     }
 
     res.cookie('auth',token,{httpOnly:true});
-    console.log(token);
     res.redirect('/');
 })
 router.get('/register',middlewares.preventAuthenticatedUser,async(req,res) => {

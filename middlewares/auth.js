@@ -1,6 +1,7 @@
 const jwt = require("../lib/jwt");
 const config = require('../database/config');
 const notificationServices = require('../services/notificationServices');
+const utils = require('../utils/avatars');
 exports.auth = async (req, res, next) => {
 
   const token = req.cookies["auth"];
@@ -11,6 +12,8 @@ exports.auth = async (req, res, next) => {
       req.user = decodedToken;
       res.locals.user = decodedToken;
       res.locals.isAuthenticated = true;
+      req.userImage = await utils.getAvatar(decodedToken.email);
+      res.locals.userImage = await utils.getAvatar(decodedToken.email);
       next();
     } catch (error) {
       console.log({ error });

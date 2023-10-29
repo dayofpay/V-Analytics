@@ -20,7 +20,7 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
     }
     const createNotification = await notificationServices.createNotification({type:'NOTIFICATION_INFO',message:'New Site Created: ' + site_name,timing:'__DEFAULT__VALUE'},req.user._id);
 
-    res.redirect(`/sites/${createSite._id}`);
+    res.redirect(`/sites/${createSite._id}/manage`);
 
 
 
