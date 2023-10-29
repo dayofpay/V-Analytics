@@ -14,7 +14,8 @@ async function createUser(userData) {
       const payload = {
         _id: user._id,
         email: user.email,
-        username : user.username
+        name : user.name,
+        company: user.company
       };
   
       const token = await jwt.sign(payload, config.JWT.SECRET_TOKEN, { expiresIn: '3d' });
@@ -47,6 +48,8 @@ async function login(email,password){
     const payload = {
       _id: user._id,
       email: user.email,
+      name : user.name,
+      company: user.company
     };
   
     const token = await jwt.sign(payload, config.JWT.SECRET_TOKEN, { expiresIn: "3d" });

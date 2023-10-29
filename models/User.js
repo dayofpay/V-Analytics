@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema({
-  username: {
+  name: {
     type: String,
     required: true,
     minLength: 3,
@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
       message: 'Repeat password should be equal to the password.',
     },
   },
+  company : {
+    type: String,
+    required: true,
+  }
 });
 userSchema.post('validate', function (doc, next) {
   if (doc.errors) {
@@ -43,6 +47,8 @@ userSchema.pre('save', async function (next) {
     const hash = await bcrypt.hash(this.password, 10);
     this.password = hash;
   }
+
+  this.repeatPassword = undefined;
   next();
 });
 
