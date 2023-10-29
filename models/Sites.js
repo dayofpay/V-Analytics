@@ -23,6 +23,9 @@ const siteSchema = new mongoose.Schema({
   ownerId : {
     type: mongoose.Types.ObjectId,
     ref: User,
+  },
+  visitors : {
+    type: Number,
   }
 });
 
