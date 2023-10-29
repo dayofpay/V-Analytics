@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const notificationSchema = require('../models/Notifications');
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -25,17 +27,16 @@ const userSchema = new mongoose.Schema({
       message: 'Repeat password should be equal to the password.',
     },
   },
-  company : {
+  company: {
     type: String,
     required: true,
   },
-  sites : {
-    type : Array
+  sites: {
+    type: Array,
   },
-  notifications : {
-    type: Array
-  }
+  notifications: [notificationSchema],
 });
+
 userSchema.post('validate', function (doc, next) {
   if (doc.errors) {
     const errorMessages = [];
@@ -44,10 +45,11 @@ userSchema.post('validate', function (doc, next) {
         errorMessages.push(doc.errors[field].message);
       }
     }
-    doc.validationErrors = errorMessages; 
+    doc.validationErrors = errorMessages;
   }
   next();
 });
+
 userSchema.pre('save', async function (next) {
   if (this.isModified('password')) {
     const hash = await bcrypt.hash(this.password, 10);
