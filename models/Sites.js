@@ -26,6 +26,7 @@ const siteSchema = new mongoose.Schema({
   },
   visitors : {
     type: Number,
+    default : 1,
   }
 });
 

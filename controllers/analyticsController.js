@@ -25,12 +25,16 @@ router.post('/sites/:id', async (req,res) => {
             // Now lets make sure that origin matches the sites url
 
             const origin = req.get('Origin');
-
             if(origin === siteUrl.site_url){
                 res.header('Access-Control-Allow-Origin', origin);
+
+                // Increment the visitors amount
+
+                siteUrl.visitors++;
+                siteUrl.save();
             }
             else{
-                res.status(403).send('Forbidden');
+                res.status(403).send({'CORS_EXCEPTION' : 'You are not allowed to send data to this URL'});
             }
         }
         else{
@@ -38,6 +42,7 @@ router.post('/sites/:id', async (req,res) => {
         }
     }
     catch(error){
+        res.send({'error' : 'An error occured while trying to send analytics data, please contact developers'})
         console.error('An error occured while trying to parse visitor data',error);
     }
 

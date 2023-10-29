@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',(event) => {
     // API endpoint URL
-    const apiUrl = 'http://localhost:3000/analytics/sites/653ea85746473775933fda90';
+    const apiUrl = 'http://localhost:3000/analytics/sites/653ecd75a686b34b5e7869bd';
 
     // Data to send to the API
     const data = {
