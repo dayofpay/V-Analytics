@@ -2,12 +2,23 @@ const router = require("express").Router();
 
 const middlewares = require('../middlewares/auth');
 
+const siteServices = require('../services/siteServices');
 router.get('/create', middlewares.protectedRoute, async (req, res) => {
 
     res.render('sites/create');
 });
 router.post('/create', middlewares.protectedRoute, async (req, res) => {
-    console.log(req.body);
+    const {site_name,company_name,site_type,site_url} = req.body;
+
+    const createSite = await siteServices.createSite({site_name,company_name,site_type,site_url},req.user._id)
+    if(createSite.hasOwnProperty('error')){
+        res.render('sites/create',{hasError:true,errorMessage:createSite.error});
+
+        return;
+    }
+
+
+
 });
 
 module.exports = router;

@@ -17,21 +17,60 @@
                     <div class="col-12 col-lg-6">
                         <div class="card">
                             <div class="card-header">
+						{{#if hasError}}
+						<div class="alert alert-danger" role="alert">
+							{{errorMessage}}
+						</div>
+						{{/if}}
                                 <h5 class="card-title mb-0">Add Site</h5>
                             </div>
                             <form action="/sites/create" method="POST">
                                 <div class="card-body">
                                     <div class="bd-example">
                                         <div class="mb-3">
-                                            <label for="site-name" class="form-label">Site Name</label>
-                                            <input type="text" class="form-control" id="site-name"
-                                               name="site-name" placeholder="My cool website name">
+                                            <label for="site-name" class="form-label" aria-required="true">Site
+                                                Name</label>
+                                            <input type="text" class="form-control" id="site_name" name="site_name"
+                                                placeholder="My cool website name" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="company_name" class="form-label" aria-required="true">Company
+                                                Name</label>
+                                            <input type="text" class="form-control" id="company_name" name="company_name"
+                                                placeholder="My cool company name" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="site_url" class="form-label" aria-required="true">Site URL</label>
+                                            <input type="text" class="form-control" id="site_url" name="site_url"
+                                                placeholder="My cool site URL" required>
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="site_type" class="form-label" aria-required="true">Website
+                                                type</label>
+                                            <select class="form-select mb-3" name="site_type" required>
+                                                <option>E-Commerce</option>
+                                                <option>Educational</option>
+                                                <option>SAAS</option>
+                                                <option>BAAS</option>
+                                                <option>Social Networking</option>
+                                                <option>Portfolio</option>
+                                                <option>Blog</option>
+                                                <option>News and Media</option>
+                                                <option>Travel and Tourism</option>
+                                                <option>Health and Wellness</option>
+                                                <!-- Add more site types here -->
+                                            </select>
+
+
                                         </div>
 
                                     </div>
                                 </div>
 
-                            <button type="submit" class="btn btn-primary">Create site</button>
+                                <button type="submit" class="btn btn-primary">Create site</button>
                             </form>
                         </div>
 

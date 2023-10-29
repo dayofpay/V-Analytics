@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
+const User = require('../models/User')
 const siteSchema = new mongoose.Schema({
   site_name: {
     type: String,
     required: true,
-    minLength: 3,
   },
   company_name: {
     type: String,
     required: true,
-    minLength: 10,
   },
   site_url: {
     type: String,
@@ -22,7 +21,8 @@ const siteSchema = new mongoose.Schema({
     },
   },
   ownerId : {
-    type: mongoose.Types.ObjectId
+    type: mongoose.Types.ObjectId,
+    ref: User,
   }
 });
 
