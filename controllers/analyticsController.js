@@ -32,6 +32,7 @@ router.post('/sites/:id', async (req,res) => {
 
                 if(!siteUrl.visitors_list.includes(req.ip)){
                     siteUrl.visitors_list.push(req.ip);
+                    siteUrl.browser_list.push(req.get('User-Agent'));
                     siteUrl.visitors++;
                 }
 

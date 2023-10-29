@@ -29,8 +29,11 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
 router.get('/:id/manage', middlewares.protectedRoute, async (req, res) => {
     let hasAccess = await siteServices.checkUserAccess(req,res);
 
+    const siteData = await Site.findById(req.params.id).exec();
+
+    const mapped = JSON.stringify(siteData)
     if(hasAccess){
-        res.render('index');
+        res.render('index',{siteData: JSON.parse(mapped)});
         return;
     }
 

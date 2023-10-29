@@ -35,6 +35,10 @@ const siteSchema = new mongoose.Schema({
   visitors_list : {
     type : Array,
     default : [],
+  },
+  browser_list : {
+    type : Array,
+    default : [],
   }
 });
 
