@@ -4,9 +4,9 @@ const router = require("express").Router();
 
 const middlewares = require('../middlewares/auth');
 
-router.get('/',middlewares.protectedRoute, async (req, res) => {
+router.get('/login',middlewares.preventAuthenticatedUser, async (req, res) => {
 
-    res.render('index');
+    res.render('auth/login');
   });
   
 
