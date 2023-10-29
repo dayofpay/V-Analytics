@@ -4,13 +4,13 @@
 						<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
 							<div class="position-relative">
 								<i class="align-middle" data-feather="bell"></i>
-								<span class="indicator">4</span>
+								<span class="indicator">{{user.notification_amount}}</span>
 							</div>
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
 							aria-labelledby="alertsDropdown">
 							<div class="dropdown-menu-header">
-								4 New Notifications
+								{{user.notification_amount}} New Notifications
 							</div>
 							<div class="list-group">
 								<a href="#" class="list-group-item">

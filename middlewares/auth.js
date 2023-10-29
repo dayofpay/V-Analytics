@@ -1,6 +1,6 @@
 const jwt = require("../lib/jwt");
 const config = require('../database/config');
-
+const notificationServices = require('../services/notificationServices');
 exports.auth = async (req, res, next) => {
 
   const token = req.cookies["auth"];
@@ -11,7 +11,6 @@ exports.auth = async (req, res, next) => {
       req.user = decodedToken;
       res.locals.user = decodedToken;
       res.locals.isAuthenticated = true;
-
       next();
     } catch (error) {
       console.log({ error });
@@ -24,8 +23,9 @@ exports.auth = async (req, res, next) => {
 };
 
 
-exports.protectedRoute = (req,res,next) => {
+exports.protectedRoute = async (req,res,next) => {
   console.log('Authentication Middleware Called');
+  req.user.notification_amount = await notificationServices.getNotifications(req.user._id);
   if (req.user) {
     return next();
   }
