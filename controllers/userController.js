@@ -4,9 +4,10 @@ const middlewares = require('../middlewares/auth');
 
 router.get('/:id', middlewares.protectedRoute, async (req, res) => {
 
-    const userId = req.params.id;
+    const userData = await User.findById(req.params.id).exec();
 
-    res.render('profiles/index');
+
+    res.render('profiles/index',userData);
 });
 
 module.exports = router;
