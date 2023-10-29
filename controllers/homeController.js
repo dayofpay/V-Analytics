@@ -6,7 +6,7 @@ const middlewares = require('../middlewares/auth');
 
 router.get('/',middlewares.protectedRoute, async (req, res) => {
 
-    res.render('index');
+    res.render('sites');
   });
   
 
