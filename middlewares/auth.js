@@ -25,8 +25,8 @@ exports.auth = async (req, res, next) => {
 
 exports.protectedRoute = async (req,res,next) => {
   console.log('Authentication Middleware Called');
-  req.user.notification_amount = await notificationServices.getNotifications(req.user._id);
   if (req.user) {
+    req.user.notification_amount = await notificationServices.getNotifications(req.user._id);
     return next();
   }
   res.redirect('/auth/login');
