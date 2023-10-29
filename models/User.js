@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
   company : {
     type: String,
     required: true,
+  },
+  sites : {
+    type : Array
   }
 });
 userSchema.post('validate', function (doc, next) {
