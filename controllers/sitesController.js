@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const User = require('../models/User');
+const Site = require('../models/Sites');
 const middlewares = require('../middlewares/auth');
 
 const siteServices = require('../services/siteServices');
@@ -23,6 +24,17 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
 
 
 
+});
+
+router.get('/:id/manage', middlewares.protectedRoute, async (req, res) => {
+    let hasAccess = await siteServices.checkUserAccess(req,res);
+
+    if(hasAccess){
+        res.render('index');
+        return;
+    }
+
+    res.send({'error' : 'You dont have permissions to manage this site !'})
 });
 
 module.exports = router;

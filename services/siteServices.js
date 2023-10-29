@@ -54,7 +54,39 @@ async function getSitesByUser(userId) {
 }
 
 
+async function checkUserAccess(req,res){
+    try {
+
+        const siteId = req.params.id;
+        const userId = req.user._id;
+
+        const site = await Site.findOne({
+            _id: siteId,
+            ownerId: userId,
+        }).exec();
+
+        if (site) {
+
+            console.log('User has access to the site:', site);
+            return true;
+
+        } else {
+
+            console.log('User does not have access to the site');
+            return false;
+
+        }
+    } catch (error) {
+        console.error('Error checking site access:', error);
+
+        res.status(500).json({ error: 'Internal Server Error' });
+        return false;
+    }
+}
+
+
 module.exports = {
     createSite: createSite,
     getSitesByUser : getSitesByUser,
+    checkUserAccess : checkUserAccess
 }
