@@ -39,6 +39,10 @@ const siteSchema = new mongoose.Schema({
   browser_list : {
     type : Array,
     default : [],
+  },
+  geolocation_data : {
+    type: Array,
+    default : [],
   }
 });
 
