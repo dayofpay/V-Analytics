@@ -18,6 +18,9 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
     }
 
 
+    res.redirect(`/sites/${createSite._id}`);
+
+
 
 });
 
