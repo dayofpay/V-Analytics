@@ -10,10 +10,9 @@ async function createNotification(notificationData, userId) {
     // Some basic validation
     typeExists() {
       switch (this.type) {
-        case 'NOTIFICATION_ALERT':
-        case 'NOTIFICATION_WARNING':
-        case 'NOTIFICATION_INFO':
-          return true;
+        case 'NOTIFICATION_ALERT': return true
+        case 'NOTIFICATION_WARNING': return true
+        case 'NOTIFICATION_INFO': return true;
         default:
           return { error: 'This notification is not valid!' };
       }
@@ -32,8 +31,9 @@ async function createNotification(notificationData, userId) {
       notificationData.message,
       new Date()
     );
-    console.log(createNotification.message);
-    if (createNotification.typeExists()) {
+
+
+    if (!createNotification.typeExists().error) {
       if (createNotification.messageIsValid()) {
         const user = await User.findById(userId).exec();
         if (!user) {
