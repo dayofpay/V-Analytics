@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded',(event) => {
     // API endpoint URL
-    const apiUrl = 'http://localhost:3000/analytics/sites/653ecd75a686b34b5e7869bd';
+	const siteKey =  '653eb1228928b21c32b94726' //YOUR_SITE_KEY_HERE; // example '653eb1228928b21c32b94726'
+
+    
+    const apiUrl = `http://localhost:3000/analytics/sites/${siteKey}`;
 
     // Data to send to the API
     const data = {
         visitorData: event,
-        siteData : window.location
+        siteData: window.location
     };
 
     // Options for the fetch request
@@ -29,4 +32,4 @@ document.addEventListener('DOMContentLoaded',(event) => {
         .catch(error => {
             console.error('Error:', error);
         });
-})
+});
