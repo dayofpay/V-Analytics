@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const User = require('../models/User');
 const middlewares = require('../middlewares/auth');
 
 const siteServices = require('../services/siteServices');
@@ -16,8 +16,7 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
 
         return;
     }
-
-
+    
     res.redirect(`/sites/${createSite._id}`);
 
 

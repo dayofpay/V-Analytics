@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
   },
   sites : {
     type : Array
+  },
+  notifications : {
+    type: Array
   }
 });
 userSchema.post('validate', function (doc, next) {
