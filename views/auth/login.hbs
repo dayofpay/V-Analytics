@@ -1,9 +1,4 @@
 <main class="d-flex w-100">
-	{{#if hasError}}
-	<div class="alert alert-danger" role="alert">
-		{{errorMessage}}
-	</div>
-	{{/if}}
 	<div class="container d-flex flex-column">
 		<div class="row vh-100">
 			<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
@@ -14,6 +9,11 @@
 						<p class="lead">
 							Sign in to your account to continue
 						</p>
+						{{#if hasError}}
+						<div class="alert alert-danger" role="alert">
+							{{errorMessage}}
+						</div>
+						{{/if}}
 					</div>
 
 					<div class="card">
@@ -23,7 +23,7 @@
 									<img src="/img/avatars/avatar.jpg" alt="Charles Hall"
 										class="img-fluid rounded-circle" width="132" height="132" />
 								</div>
-								<form>
+								<form action="/auth/login" method="POST">
 									<div class="mb-3">
 										<label class="form-label">Email</label>
 										<input class="form-control form-control-lg" type="email" name="email"
@@ -47,8 +47,7 @@
 										</label>
 									</div>
 									<div class="text-center mt-3">
-										<a href="index.html" class="btn btn-lg btn-primary">Sign in</a>
-										<!-- <button type="submit" class="btn btn-lg btn-primary">Sign in</button> -->
+										<button type="submit" class="btn btn-lg btn-primary">Sign in</button>
 									</div>
 								</form>
 							</div>
