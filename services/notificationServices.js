@@ -24,16 +24,16 @@ async function createNotification(notificationData, userId) {
         }
 
 
-        getIcon(){
+        // getIcon(){
 
-            const ICON_LIST = {
-                'NOTIFICATION_ALERT' : `
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell text-warning"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
-                `
-            }
+        //     const ICON_LIST = {
+        //         'NOTIFICATION_ALERT' : `
+        //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell text-warning"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        //         `
+        //     }
 
-            return ICON_LIST[this.type];
-        }
+        //     return ICON_LIST[this.type];
+        // }
         messageIsValid() {
             return this.message.length >= 4 ?
                 true :
@@ -63,7 +63,6 @@ async function createNotification(notificationData, userId) {
                 const notify = {
                     notification_type: notificationData.type,
                     notification_message: notificationData.message,
-                    notification_icon : createNotification.getIcon(),
                     notification_timing: new Date(),
                 };
 
@@ -93,9 +92,12 @@ async function getNotifications(userId){
         }
     }
 
-    const notificationAmount = await user.notifications.length;
+    const notificationAmount = await user.notifications;
 
-    return notificationAmount;
+    return {
+        amount : notificationAmount.length,
+        notifications : await user.notifications,
+    };
 }
 
 module.exports = {

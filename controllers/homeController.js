@@ -12,9 +12,8 @@ router.get('/', middlewares.protectedRoute, async (req, res) => {
     [] : {
       siteData: JSON.parse(mapped)
     });
-  //const createNotification = await notificationServices.createNotification({type:'NOTIFICATION_ALERT',message:'Test message',timing:'__DEFAULT__VALUE'},req.user._id);
 
-  //console.log(createNotification);
+
   
 });
 
