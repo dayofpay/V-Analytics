@@ -1,6 +1,31 @@
 const User = require('../models/User');
 async function createNotification(notificationData,userId) {
+
+
+    class Notification{
+        constructor(type,message,timing){
+            this.type = type;
+            this.message = message;
+            this.timing = timing;
+        }
+
+        typeExists(){
+            switch(this.type){
+                case 'NOTIFICATION_ALERT':
+                    return true;
+                    break;
+                case 'NOTIFICATION_WARNING':
+                    return true;
+                    break;
+                default:
+                    return {error: 'This notification is not valid !'}
+            }
+        }
+    }
     try {
+
+        const testNotification = new Notification(notificationData.type,notificationData.message,notificationData.timing);
+        console.log(testNotification.typeExists(),'RESULT');
         const user = await User.findById(userId).exec();
         if (!user) {
             return { error: 'User not found' };
