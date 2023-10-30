@@ -2,6 +2,7 @@
 
 const router = require("express").Router();
 
+const { APP_CONFIG } = require("../config/app");
 const middlewares = require('../middlewares/auth');
 
 const userServices = require('../services/userServices');
@@ -17,7 +18,9 @@ router.post('/login',middlewares.preventAuthenticatedUser,async (req,res) => {
     const token = await userServices.login(email,password);
 
     if(token.hasOwnProperty('error')){
-        console.log('Invalid username or password.');
+        if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+            console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Invalid Username OR Password !`);
+        }
         res.render('auth/login',{hasError:true,errorMessage:token.error});
 
         return;
@@ -43,7 +46,9 @@ router.post('/register',middlewares.preventAuthenticatedUser,async(req,res) => {
         return;
     }
 
-    console.log(token);
+    if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+        console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Token - ${token}`);
+    }
     res.cookie("auth", token, { httpOnly: true });
 
     res.redirect("/");

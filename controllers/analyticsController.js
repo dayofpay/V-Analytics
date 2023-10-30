@@ -7,6 +7,7 @@ const Site = require('../models/Sites');
 let cors = require('cors');
 const ipTools = require('../utils/ipTools');
 const security = require('../utils/security');
+const config = require('../config/app');
 let corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
@@ -20,10 +21,12 @@ router.post('/sites/:id', async (req, res) => {
     // Get Site URL
 
     try {
-        const checkProxy = await security.isProxy(req.ip);
-        if(checkProxy.isProxy){
-            res.status(403).send({SecurityException : 'You are not allowed to send analytics data using Proxy'});
-            return;
+        if(config.APP_CONFIG.SECURITY.PROXY_CHECK){
+            const checkProxy = await security.isProxy(req.ip);
+            if(checkProxy.isProxy){
+                res.status(403).send({SecurityException : 'You are not allowed to send analytics data using Proxy'});
+                return;
+            }
         }
         const siteUrl = await Site.findById(req.params.id).exec();
         if (siteUrl) {
@@ -58,7 +61,9 @@ router.post('/sites/:id', async (req, res) => {
                 });
             }
         } else {
-            console.log(false);
+            if(config.APP_CONFIG.DEBUG.DEBUG_ENABLED){
+                console.log(`${config.APP_CONFIG.DEBUG.DEBUG_PREFIX} This site does not exists!`);
+            }
         }
     } catch (error) {
         res.send({

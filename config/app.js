@@ -6,6 +6,13 @@ const APP_CONFIG = {
         'MESSAGES' : {
 
         }
+    },
+    'SECURITY' : {
+        PROXY_CHECK : true,
+    },
+    'DEBUG' : {
+        DEBUG_ENABLED : false,
+        DEBUG_PREFIX : '[DEBUG]',
     }
 }
 

@@ -44,7 +44,7 @@ async function login(email,password){
       return {error:"Invalid email or password!"}
     }
 
-    console.log(isValid);
+
     const payload = {
       _id: user._id,
       email: user.email,

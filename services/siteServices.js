@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const Site = require('../models/Sites');
+const { APP_CONFIG } = require('../config/app');
 // const jwt = require('jsonwebtoken');
 // const config = require('../database/config');
 async function createSite(siteData,userId) {
@@ -21,8 +22,9 @@ async function createSite(siteData,userId) {
         // Add the created site to the user's sites array
         user.sites.push(site);
         await user.save();
-
-        console.log('Site Created!');
+        if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+            console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Site Created!`);
+        }
         return site;
     } catch (error) {
         console.error('Error creating site:', error);
@@ -71,8 +73,9 @@ async function checkUserAccess(req,res){
             return true;
 
         } else {
-
-            console.log('User does not have access to the site');
+            if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+                console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} User does not have access to the site!`);
+            }
             return false;
 
         }

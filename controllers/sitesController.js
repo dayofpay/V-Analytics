@@ -6,6 +6,7 @@ const middlewares = require('../middlewares/auth');
 const siteServices = require('../services/siteServices');
 
 const notificationServices = require('../services/notificationServices');
+const { APP_CONFIG } = require("../config/app");
 router.get('/create', middlewares.protectedRoute, async (req, res) => {
 
     res.render('sites/create');
@@ -52,8 +53,9 @@ router.get('/:id/manage', middlewares.protectedRoute, async (req, res) => {
 
 
     const mapped = JSON.stringify(siteData);
-
-    console.log(siteData.browser_list);
+    if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+        console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Browser List ${siteData.browser_list}`);
+    }
     if (hasAccess) {
         res.render('index', {
             siteData: JSON.parse(mapped),

@@ -16,7 +16,6 @@ exports.auth = async (req, res, next) => {
       res.locals.userImage = await utils.getAvatar(decodedToken.email);
       next();
     } catch (error) {
-      console.log({ error });
       res.clearCookie("auth");
       res.redirect("/auth/login");
     }
