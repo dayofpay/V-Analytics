@@ -68,8 +68,9 @@ async function checkUserAccess(req,res){
         }).exec();
 
         if (site) {
-
-            console.log('User has access to the site:', site);
+            if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
+                console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} User has access to the site: ${site}`);
+            }
             return true;
 
         } else {
