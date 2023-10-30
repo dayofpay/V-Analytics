@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded',(event) => {
     // API endpoint URL
-	const siteKey = '653ee2b39b88c811650d9e4e' //YOUR_SITE_KEY_HERE; // example '653eb1228928b21c32b94726'
+	const siteKey = '653eeb3c6197108568561955' //YOUR_SITE_KEY_HERE; // example '653eb1228928b21c32b94726'
 
     
     const apiUrl = `http://localhost:3000/analytics/sites/${siteKey}`;

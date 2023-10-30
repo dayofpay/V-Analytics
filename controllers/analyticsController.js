@@ -23,7 +23,7 @@ router.post('/sites/:id', async (req, res) => {
         const siteUrl = await Site.findById(req.params.id).exec();
         if (siteUrl) {
 
-            console.log(req.body, 'VISITOR DATA');
+            // if you want to debug > console.log(req.body, 'VISITOR DATA');
 
             // Now lets make sure that origin matches the sites url
 
@@ -39,8 +39,7 @@ router.post('/sites/:id', async (req, res) => {
                     siteUrl.visitors++;
                     // Get IP Info
 
-                    let ipData = await ipTools.fetchIPData(req.ip);
-
+                    let ipData = await ipTools.fetchIPData('45.83.216.22');
                     siteUrl.geolocation_data.push({
                         ipData
                     });
