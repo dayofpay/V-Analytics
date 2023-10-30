@@ -35,11 +35,11 @@ router.post('/sites/:id', async (req, res) => {
 
                 if (!siteUrl.visitors_list.includes(req.ip)) {
                     siteUrl.visitors_list.push(req.ip);
-                    siteUrl.browser_list.push(req.get('User-Agent'));
+                    siteUrl.browser_list.push({data:req.get('User-Agent')});
                     siteUrl.visitors++;
                     // Get IP Info
 
-                    let ipData = await ipTools.fetchIPData('45.83.216.22');
+                    let ipData = await ipTools.fetchIPData(req.ip);
                     siteUrl.geolocation_data.push({
                         ipData
                     });

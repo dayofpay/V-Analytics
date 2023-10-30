@@ -51,7 +51,9 @@ router.get('/:id/manage', middlewares.protectedRoute, async (req, res) => {
     const successedSites = siteData.geolocation_data.find(site => site.ipData.status === 'success');
 
 
-    const mapped = JSON.stringify(siteData)
+    const mapped = JSON.stringify(siteData);
+
+    console.log(siteData.browser_list);
     if (hasAccess) {
         res.render('index', {
             siteData: JSON.parse(mapped),
