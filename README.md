@@ -34,8 +34,9 @@ V-Analytics is a software solution built with Handlebars, Express.JS, and Node.J
  - [Configuration](https://github.com/dayofpay/V-Analytics/docs/config.md)
  - [Integration](https://github.com/dayofpay/V-Analytics/docs/integration.md)
 
-
-## Screenshots
-
-![App Screenshot](https://prnt.sc/4KM3kO0zaIHt)
-
+# A few screenshots
+![Screenshot](https://i.gyazo.com/c23bd13eb1e8b92e2f5aaa8e50a4d98c.png)
+![Screenshot](https://i.gyazo.com/cf61e608c56821f60c3d7cd8b920e835.png)
+![Screenshot](https://i.gyazo.com/4bfee18bd2dd5ec91801966a1dc21755.png)
+![Screenshot](https://i.gyazo.com/42360b64c87d38c708d197cbc9668d92.png)
+![Screenshot](https://i.gyazo.com/c484953065a5bfd1ec877d2d4e5298b6.png)
