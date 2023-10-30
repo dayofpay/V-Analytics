@@ -6,7 +6,9 @@ const middlewares = require('../middlewares/auth');
 const siteServices = require('../services/siteServices');
 
 const notificationServices = require('../services/notificationServices');
-const { APP_CONFIG } = require("../config/app");
+const {
+    APP_CONFIG
+} = require("../config/app");
 router.get('/create', middlewares.protectedRoute, async (req, res) => {
 
     res.render('sites/create');
@@ -45,30 +47,39 @@ router.post('/create', middlewares.protectedRoute, async (req, res) => {
 });
 
 router.get('/:id/manage', middlewares.protectedRoute, async (req, res) => {
-    let hasAccess = await siteServices.checkUserAccess(req, res);
 
-    const siteData = await Site.findById(req.params.id).exec();
+    try {
+        const siteData = await Site.findById(req.params.id).exec();
 
-    const successedSites = siteData.geolocation_data.find(site => site.ipData.status === 'success');
+        if (siteData) {
+            let hasAccess = await siteServices.checkUserAccess(req, res);
+            const successedSites = siteData.geolocation_data.find(site => site.ipData.status === 'success');
 
 
-    const mapped = JSON.stringify(siteData);
-    if(APP_CONFIG.DEBUG.DEBUG_ENABLED){
-        console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Browser List ${siteData.browser_list}`);
+            const mapped = JSON.stringify(siteData);
+            if (APP_CONFIG.DEBUG.DEBUG_ENABLED) {
+                console.log(`${APP_CONFIG.DEBUG.DEBUG_PREFIX} Browser List ${siteData.browser_list}`);
+            }
+            if (hasAccess) {
+                res.render('index', {
+                    siteData: JSON.parse(mapped),
+                    visitorList: siteData.visitors_list,
+                    browserList: siteData.browser_list,
+                    geoLocationData: successedSites
+                });
+                return;
+            }
+
+            res.send({
+                'error': 'You dont have permissions to manage this site !'
+            })
+        } else {
+            res.send({'error': 'This site does not exists !'});
+        }
+    } catch (error) {
+        res.redirect('/')
     }
-    if (hasAccess) {
-        res.render('index', {
-            siteData: JSON.parse(mapped),
-            visitorList: siteData.visitors_list,
-            browserList: siteData.browser_list,
-            geoLocationData: successedSites
-        });
-        return;
-    }
 
-    res.send({
-        'error': 'You dont have permissions to manage this site !'
-    })
 });
 
 module.exports = router;
