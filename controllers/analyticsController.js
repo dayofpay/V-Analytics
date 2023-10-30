@@ -6,7 +6,7 @@ const router = require('express').Router();
 const Site = require('../models/Sites');
 let cors = require('cors');
 const ipTools = require('../utils/ipTools');
-
+const security = require('../utils/security');
 let corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
@@ -20,6 +20,11 @@ router.post('/sites/:id', async (req, res) => {
     // Get Site URL
 
     try {
+        const checkProxy = await security.isProxy(req.ip);
+        if(checkProxy.isProxy){
+            res.status(403).send({SecurityException : 'You are not allowed to send analytics data using Proxy'});
+            return;
+        }
         const siteUrl = await Site.findById(req.params.id).exec();
         if (siteUrl) {
 
