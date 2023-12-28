@@ -20,6 +20,13 @@ let corsOptions = {
 router.post('/sites/:id', async (req, res) => {
     // Get Site URL
 
+    // Check if the ip blocking feature is enabled
+    if(config.APP_CONFIG.SECURITY.IP_BLACKLIST){
+        if(config.APP_CONFIG.SECURITY.BLACKLIST_SETTINGS.BANNED_IPS.includes(req.ip)){
+            res.status(403).send({AuthorizationException : 'Your ip address is banned on this website !'});
+            return;
+        }
+    }
     try {
         if(config.APP_CONFIG.SECURITY.PROXY_CHECK){
             const checkProxy = await security.isProxy(req.ip);

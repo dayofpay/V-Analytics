@@ -9,6 +9,11 @@ const APP_CONFIG = {
     },
     'SECURITY' : {
         PROXY_CHECK : true,
+        IP_BLACKLIST: false,
+
+        BLACKLIST_SETTINGS : {
+            BANNED_IPS : ["::ffff:127.0.0.1"],
+        }
     },
     'DEBUG' : {
         DEBUG_ENABLED : false,
