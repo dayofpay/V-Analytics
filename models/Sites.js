@@ -43,6 +43,10 @@ const siteSchema = new mongoose.Schema({
   geolocation_data : {
     type: Array,
     default : [],
+  },
+  visit_dates : {
+    type: Array,
+    default : [],
   }
 });
 

@@ -40,11 +40,12 @@ router.post('/sites/:id', async (req, res) => {
                 res.header('Access-Control-Allow-Origin', origin);
 
                 // Increment the visitors amount
-
                 if (!siteUrl.visitors_list.includes(req.ip)) {
                     siteUrl.visitors_list.push(req.ip);
                     siteUrl.browser_list.push({data:req.get('User-Agent')});
                     siteUrl.visitors++;
+                    const date = new Date();
+                    siteUrl.visit_dates.push(date);
                     // Get IP Info
 
                     let ipData = await ipTools.fetchIPData(req.ip);
