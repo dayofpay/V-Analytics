@@ -4,11 +4,7 @@ const handlebarsConfig = (app) => {
      // > Handlebars config <
 
      Handlebars.registerHelper('eq', function (a, b, options) {
-          if (a === b) {
-               return true
-          } else {
-               return false;
-          }
+          return a === b;
      });
      app.engine('hbs', handlebars.engine({
           extname: '.hbs'
